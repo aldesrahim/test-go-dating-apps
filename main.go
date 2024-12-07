@@ -1,6 +1,7 @@
 package main
 
 import (
+	"aldesrahim/test-go-dating-apps/database"
 	"github.com/joho/godotenv"
 	"os"
 )
@@ -25,4 +26,7 @@ func main() {
 			panic("Missing environment variable: " + variable)
 		}
 	}
+
+	database.Connect()
+	database.Migrate()
 }
