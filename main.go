@@ -2,6 +2,8 @@ package main
 
 import (
 	"aldesrahim/test-go-dating-apps/database"
+	"aldesrahim/test-go-dating-apps/routes"
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"os"
 )
@@ -29,4 +31,9 @@ func main() {
 
 	database.Connect()
 	database.Migrate()
+
+	r := gin.Default()
+	routes.ApiRoutes(r)
+
+	r.Run(os.Getenv("APP_HOST"))
 }
