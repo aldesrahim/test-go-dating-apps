@@ -1,7 +1,11 @@
 package models
 
+import "time"
+
 type Product struct {
-	Model
-	Name string
-	Code string `gorm:"uniqueIndex"`
+	ID        uint      `gorm:"primarykey" json:"id"`
+	Name      string    `json:"name"`
+	Code      string    `gorm:"uniqueIndex" json:"code"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }

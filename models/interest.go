@@ -1,8 +1,12 @@
 package models
 
+import "time"
+
 type Interest struct {
-	Model
-	code  string `gorm:"uniqueIndex:code_group"`
-	group string `gorm:"uniqueIndex:code_group"`
-	label string
+	ID        uint      `gorm:"primarykey" json:"id"`
+	Code      string    `gorm:"uniqueIndex:code_group" json:"code"`
+	Group     string    `gorm:"uniqueIndex:code_group" json:"group"`
+	Label     string    `json:"label"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }

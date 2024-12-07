@@ -1,14 +1,19 @@
 package models
 
-import "database/sql"
+import (
+	"database/sql"
+	"time"
+)
 
 type Match struct {
-	Model
-	FirstUserID  uint
-	FirstUser    User `gorm:"foreignKey:FirstUserID"`
-	SecondUserID uint
-	SecondUser   User `gorm:"foreignKey:SecondUserID"`
-	ClosedAt     sql.NullTime
-	ClosedUserID uint
-	ClosedUser   User `gorm:"foreignKey:ClosedUserID"`
+	ID           uint         `gorm:"primarykey" json:"id"`
+	FirstUserID  uint         `json:"first_user_id"`
+	FirstUser    User         `gorm:"foreignKey:FirstUserID" json:"first_user"`
+	SecondUserID uint         `json:"second_user_id"`
+	SecondUser   User         `gorm:"foreignKey:SecondUserID" json:"second_user"`
+	ClosedAt     sql.NullTime `json:"closed_at"`
+	ClosedUserID uint         `json:"closed_user_id"`
+	ClosedUser   User         `gorm:"foreignKey:ClosedUserID" json:"closed_user"`
+	CreatedAt    time.Time    `json:"created_at"`
+	UpdatedAt    time.Time    `json:"updated_at"`
 }

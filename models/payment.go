@@ -1,13 +1,18 @@
 package models
 
-import "database/sql"
+import (
+	"database/sql"
+	"time"
+)
 
 type Payment struct {
-	Model
-	UserID    uint
-	User      User
-	PaidAt    sql.NullTime
-	Amount    float64
-	Status    string
-	Reference sql.NullString
+	ID        uint           `gorm:"primarykey" json:"id"`
+	UserID    uint           `json:"user_id"`
+	User      User           `json:"user"`
+	PaidAt    sql.NullTime   `json:"paid_at"`
+	Amount    float64        `json:"amount"`
+	Status    string         `json:"status"`
+	Reference sql.NullString `json:"reference"`
+	CreatedAt time.Time      `json:"created_at"`
+	UpdatedAt time.Time      `json:"updated_at"`
 }
