@@ -16,6 +16,13 @@ func NewAuthController(LoggedInUser *middlewares.LoggedInUser) *AuthController {
 	return &AuthController{LoggedInUser: LoggedInUser}
 }
 
+func invalidEmailOrPassword(c *gin.Context) {
+	c.JSON(http.StatusBadRequest, gin.H{
+		"status": http.StatusBadRequest,
+		"error":  "The email or password you entered is incorrect",
+	})
+}
+
 func (ctrl *AuthController) Register(c *gin.Context) {
 	var input struct {
 		Email    string `json:"email" binding:"required,email"`
@@ -44,7 +51,7 @@ func (ctrl *AuthController) Register(c *gin.Context) {
 		if utils.ErrDBIsDuplicate(err) {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"status": http.StatusBadRequest,
-				"error":  "Email already exists",
+				"error":  "The email you entered is already registered",
 			})
 
 			return
@@ -88,10 +95,7 @@ func (ctrl *AuthController) Login(c *gin.Context) {
 
 	if err := database.DB.Where("email = ?", input.Email).First(&user).Error; err != nil {
 		if utils.ErrDBIsNotFound(err) {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"status": http.StatusBadRequest,
-				"error":  "User not registered",
-			})
+			invalidEmailOrPassword(c)
 
 			return
 		}
@@ -105,10 +109,7 @@ func (ctrl *AuthController) Login(c *gin.Context) {
 	}
 
 	if !utils.CheckPasswordHash(input.Password, user.PasswordHash) {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid password",
-		})
+		invalidEmailOrPassword(c)
 
 		return
 	}
