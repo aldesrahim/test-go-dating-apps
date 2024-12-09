@@ -1,0 +1,1338 @@
+{
+	"info": {
+		"_postman_id": "38a94630-7521-4e43-ad84-e40ca9e848bf",
+		"name": "Dealls - GO Dating Apps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5821447"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('auth-register-success', () => {\r",
+									"    pm.response.to.be.json\r",
+									"    pm.response.to.be.ok\r",
+									"\r",
+									"    const json = pm.response.json()\r",
+									"\r",
+									"    pm.expect(json).to.have.property(\"token\")\r",
+									"    pm.expect(json).to.have.nested.property(\"user.id\")\r",
+									"\r",
+									"\r",
+									"    const token = json.token\r",
+									"    const userId = json.user.id\r",
+									"\r",
+									"    pm.collectionVariables.set(\"token\", token)\r",
+									"    pm.collectionVariables.set(\"user_id\", userId)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/auth/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/auth/register",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 07:50:35 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "367"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzM4MTcwMzUsImlkIjoxfQ.MntX1k0Pu0gXPN-AEhctRaCo6Sa6HZiQGnubSWu-fw4\",\n    \"user\": {\n        \"id\": 1,\n        \"email\": \"john.mahad@mail.com\",\n        \"bio\": null,\n        \"dob\": null,\n        \"location\": null,\n        \"age\": null,\n        \"name\": null,\n        \"gender\": null,\n        \"interest\": null,\n        \"created_at\": \"2024-12-09T14:50:35.162+07:00\",\n        \"updated_at\": \"2024-12-09T14:50:35.162+07:00\"\n    }\n}"
+						},
+						{
+							"name": "400 - email registered",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/auth/register",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 11:13:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"The email you entered is already registered\",\n    \"status\": 400\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('auth-login-success', () => {\r",
+									"    pm.response.to.be.json\r",
+									"    pm.response.to.be.ok\r",
+									"\r",
+									"    const json = pm.response.json()\r",
+									"\r",
+									"    pm.expect(json).to.have.property(\"token\")\r",
+									"    pm.expect(json).to.have.nested.property(\"user.id\")\r",
+									"\r",
+									"\r",
+									"    const token = json.token\r",
+									"    const userId = json.user.id\r",
+									"\r",
+									"    pm.collectionVariables.set(\"token\", token)\r",
+									"    pm.collectionVariables.set(\"user_id\", userId)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/auth",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/auth",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"auth"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 07:50:42 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "367"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzM4MTcwNDIsImlkIjoxfQ.ZX_vj-KloQEVdhv7rGxbQvOwXqsFptgyW8_BQLC8oLo\",\n    \"user\": {\n        \"id\": 1,\n        \"email\": \"john.mahad@mail.com\",\n        \"bio\": null,\n        \"dob\": null,\n        \"location\": null,\n        \"age\": null,\n        \"name\": null,\n        \"gender\": null,\n        \"interest\": null,\n        \"created_at\": \"2024-12-09T14:50:35.162+07:00\",\n        \"updated_at\": \"2024-12-09T14:50:35.162+07:00\"\n    }\n}"
+						},
+						{
+							"name": "400 - incorrect email or password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"{{email}}a\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/auth",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"auth"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 11:15:05 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "71"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"The email or password you entered is incorrect\",\n    \"status\": 400\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/profile",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 07:54:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "297"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"user\": {\n        \"id\": 1,\n        \"email\": \"john.mahad@mail.com\",\n        \"bio\": \"I dont like shrimps\",\n        \"dob\": \"2005-10-20T07:00:00+07:00\",\n        \"location\": \"Jakarta\",\n        \"age\": 19,\n        \"name\": \"John Mahad\",\n        \"gender\": \"male\",\n        \"interest\": \"female\",\n        \"created_at\": \"2024-12-09T14:50:35.162+07:00\",\n        \"updated_at\": \"2024-12-09T14:51:44.46+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Mahad\",\r\n    \"bio\": \"I dont like seafood\",\r\n    \"dob\": \"2005-10-20\",\r\n    \"location\": \"Jakarta\",\r\n    \"gender\": \"male\",\r\n    \"interest\": \"female\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Mahad\",\r\n    \"bio\": \"I dont like shrimps\",\r\n    \"dob\": \"2005-10-20\",\r\n    \"location\": \"Jakarta\",\r\n    \"gender\": \"male\",\r\n    \"interest\": \"female\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/profile",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 07:51:44 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "292"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"user\": {\n        \"id\": 1,\n        \"email\": \"john.mahad@mail.com\",\n        \"bio\": \"I dont like shrimps\",\n        \"dob\": \"2005-10-20T00:00:00Z\",\n        \"location\": \"Jakarta\",\n        \"age\": 19,\n        \"name\": \"John Mahad\",\n        \"gender\": \"male\",\n        \"interest\": \"female\",\n        \"created_at\": \"2024-12-09T14:50:35.162+07:00\",\n        \"updated_at\": \"2024-12-09T14:51:44.46+07:00\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "subscriptions",
+			"item": [
+				{
+					"name": "products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('subscription-products', () => {\r",
+									"    pm.response.to.be.ok\r",
+									"    pm.response.to.be.json\r",
+									"\r",
+									"    const json = pm.response.json()\r",
+									"\r",
+									"    pm.expect(json).to.have.property(\"data\").that.not.empty\r",
+									"\r",
+									"    const products = json.data\r",
+									"\r",
+									"    pm.expect(products[0]).to.have.property(\"periods\").that.not.empty\r",
+									"    \r",
+									"    products.forEach(product => {\r",
+									"        const periods = product.periods\r",
+									"        \r",
+									"        periods.forEach(period => {\r",
+									"            const key = `product.${product.code}.for.${period.monthly_period}month`\r",
+									"\r",
+									"            pm.collectionVariables.set(key, period.id)\r",
+									"        })\r",
+									"    })\r",
+									"    \r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/subscription/products",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"subscription",
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/subscription/products",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"subscription",
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 09:25:47 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1745"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Infinite Swipe\",\n            \"code\": \"infSwipe\",\n            \"periods\": [\n                {\n                    \"id\": 1,\n                    \"product_id\": 1,\n                    \"monthly_period\": 1,\n                    \"price\": 25000,\n                    \"created_at\": \"2024-12-09T15:28:38+07:00\",\n                    \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n                },\n                {\n                    \"id\": 2,\n                    \"product_id\": 1,\n                    \"monthly_period\": 6,\n                    \"price\": 105000,\n                    \"created_at\": \"2024-12-09T15:28:38+07:00\",\n                    \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n                },\n                {\n                    \"id\": 3,\n                    \"product_id\": 1,\n                    \"monthly_period\": 12,\n                    \"price\": 630000,\n                    \"created_at\": \"2024-12-09T15:28:38+07:00\",\n                    \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n                }\n            ],\n            \"created_at\": \"2024-12-09T15:28:38+07:00\",\n            \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Verified Profile\",\n            \"code\": \"verifiedProfile\",\n            \"periods\": [\n                {\n                    \"id\": 4,\n                    \"product_id\": 2,\n                    \"monthly_period\": 1,\n                    \"price\": 35000,\n                    \"created_at\": \"2024-12-09T15:28:38+07:00\",\n                    \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n                },\n                {\n                    \"id\": 5,\n                    \"product_id\": 2,\n                    \"monthly_period\": 6,\n                    \"price\": 147000,\n                    \"created_at\": \"2024-12-09T15:28:38+07:00\",\n                    \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n                },\n                {\n                    \"id\": 6,\n                    \"product_id\": 2,\n                    \"monthly_period\": 12,\n                    \"price\": 882000,\n                    \"created_at\": \"2024-12-09T15:28:38+07:00\",\n                    \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n                }\n            ],\n            \"created_at\": \"2024-12-09T15:28:38+07:00\",\n            \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Infinite Swipe + Verified Profile\",\n            \"code\": \"combo1\",\n            \"periods\": [\n                {\n                    \"id\": 7,\n                    \"product_id\": 3,\n                    \"monthly_period\": 1,\n                    \"price\": 50000,\n                    \"created_at\": \"2024-12-09T15:28:38+07:00\",\n                    \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n                },\n                {\n                    \"id\": 8,\n                    \"product_id\": 3,\n                    \"monthly_period\": 6,\n                    \"price\": 210000,\n                    \"created_at\": \"2024-12-09T15:28:38+07:00\",\n                    \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n                },\n                {\n                    \"id\": 9,\n                    \"product_id\": 3,\n                    \"monthly_period\": 12,\n                    \"price\": 1260000,\n                    \"created_at\": \"2024-12-09T15:28:38+07:00\",\n                    \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n                }\n            ],\n            \"created_at\": \"2024-12-09T15:28:38+07:00\",\n            \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n        }\n    ],\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "active subs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/subscription/active",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"subscription",
+								"active"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400 - not subscribed",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/subscription/active",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"subscription",
+										"active"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 11:19:55 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"You are currently not subscribe to anything\",\n    \"status\": 400\n}"
+						},
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/subscription/active",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"subscription",
+										"active"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 12:27:46 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "405"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 5,\n        \"user_id\": 1,\n        \"payment_id\": 5,\n        \"product_id\": 1,\n        \"product\": {\n            \"id\": 1,\n            \"name\": \"Infinite Swipe\",\n            \"code\": \"infSwipe\",\n            \"created_at\": \"2024-12-09T15:28:38+07:00\",\n            \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n        },\n        \"product_period_id\": 3,\n        \"start_date\": \"2024-12-09T00:00:00+07:00\",\n        \"end_date\": \"2025-12-10T00:00:00+07:00\",\n        \"created_at\": \"2024-12-09T19:27:18.79+07:00\",\n        \"updated_at\": \"2024-12-09T19:27:18.79+07:00\"\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "buy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_period_id\": {{product.infSwipe.for.12month}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/subscription/buy",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"subscription",
+								"buy"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400 - subscribe to same product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"product_period_id\": {{product.infSwipe.for.1month}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/subscription/buy",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"subscription",
+										"buy"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 11:34:30 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "86"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"You are already subscribed to Infinite Swipe until 2024-12-10\",\n    \"status\": 400\n}"
+						},
+						{
+							"name": "400 - subscribed to another, add combo product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"product_period_id\": {{product.combo1.for.1month}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/subscription/buy",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"subscription",
+										"buy"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 11:34:56 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"You can't combine your currently active subscription with \\\"Combo\\\" product\",\n    \"status\": 400\n}"
+						},
+						{
+							"name": "400 - subscribed to combo, add another product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"product_period_id\": {{product.infSwipe.for.12month}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/subscription/buy",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"subscription",
+										"buy"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 11:36:05 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "108"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"You can't combine your currently active subscription \\\"Combo\\\" with another product\",\n    \"status\": 400\n}"
+						},
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"product_period_id\": {{product.infSwipe.for.12month}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/subscription/buy",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"subscription",
+										"buy"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 12:27:08 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "414"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 5,\n        \"user_id\": 1,\n        \"product_id\": 1,\n        \"product\": {\n            \"id\": 1,\n            \"name\": \"Infinite Swipe\",\n            \"code\": \"infSwipe\",\n            \"created_at\": \"2024-12-09T15:28:38+07:00\",\n            \"updated_at\": \"2024-12-09T15:28:38+07:00\"\n        },\n        \"product_period_id\": 3,\n        \"monthly_period\": 12,\n        \"price\": 630000,\n        \"paid_at\": null,\n        \"status\": \"pending\",\n        \"reference\": \"TRX-001.1733747228\",\n        \"created_at\": \"2024-12-09T19:27:08.582+07:00\",\n        \"updated_at\": \"2024-12-09T19:27:08.582+07:00\"\n    },\n    \"status\": 200\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "swipes",
+			"item": [
+				{
+					"name": "swipeable",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('swipes-swipeable', () => {\r",
+									"    pm.response.to.be.ok\r",
+									"    pm.response.to.be.json\r",
+									"    \r",
+									"    const resp = pm.response.json()\r",
+									"\r",
+									"    pm.expect(resp).to.have.nested.property(\"data.swipeable\")\r",
+									"\r",
+									"    const swipeableId = resp.data.swipeable.id\r",
+									"\r",
+									"    pm.collectionVariables.set('swipeable_id', swipeableId)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/swipes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"swipes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/swipes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"swipes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 14:37:09 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "639"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"swipeable\": {\n            \"id\": 4,\n            \"swipe_id\": 1,\n            \"user_id\": 1,\n            \"swiped_user_id\": 224,\n            \"swiped_user\": {\n                \"id\": 224,\n                \"email\": \"maximillia43@example.com\",\n                \"bio\": \"Aut fuga dolor est fuga adipisci voluptatem debitis ullam. Voluptatem adipisci tempora molestias error et. Sunt eveniet quisquam voluptatibus aut.\",\n                \"dob\": \"1993-08-18T00:00:00+07:00\",\n                \"location\": \"Amelyhaven\",\n                \"age\": 31,\n                \"name\": \"Eryn Hessel PhD\",\n                \"gender\": \"female\",\n                \"interest\": \"male\",\n                \"created_at\": \"2024-12-09T13:07:29+07:00\",\n                \"updated_at\": \"2024-12-09T13:07:29+07:00\"\n            },\n            \"status\": null,\n            \"created_at\": \"2024-12-09T21:37:04.842+07:00\",\n            \"updated_at\": \"2024-12-09T21:37:04.842+07:00\"\n        },\n        \"is_verified\": false\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "400 - reached daily limit",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/swipes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"swipes"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 14:39:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"You've reached today's limit\",\n    \"status\": 400\n}"
+						},
+						{
+							"name": "466 - swiped all the users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/swipes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"swipes"
+									]
+								}
+							},
+							"status": "Custom Code",
+							"code": 466,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 14:39:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Congratulations! You're already swiped all the registered users\",\n    \"status\": 466\n}"
+						}
+					]
+				},
+				{
+					"name": "save",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Get the raw JSON body from the request\r",
+									"let rawBody = pm.request.body.raw;\r",
+									"\r",
+									"// Function to remove JSON comments\r",
+									"function stripJsonComments(json) {\r",
+									"    // Remove single-line comments (//...)\r",
+									"    json = json.replace(/\\/\\/.*$/gm, \"\");\r",
+									"    \r",
+									"    // Remove multi-line comments (/* ... */)\r",
+									"    json = json.replace(/\\/\\*[\\s\\S]*?\\*\\//gm, \"\");\r",
+									"    \r",
+									"    return json;\r",
+									"}\r",
+									"\r",
+									"// Strip comments from the body\r",
+									"let cleanedBody = stripJsonComments(rawBody);\r",
+									"\r",
+									"// Update the request body with the cleaned JSON\r",
+									"pm.request.body.update(cleanedBody);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": 1 // 0 for pass, 1 for like\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/swipes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"swipes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": 1 // 0 for pass, 1 for like\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/swipes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"swipes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Dec 2024 15:00:57 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "784"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"swipeable\": {\n            \"id\": 4,\n            \"swipe_id\": 1,\n            \"swipe\": {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"counter\": 1,\n                \"remaining\": null,\n                \"created_at\": \"2024-12-09T21:32:21.544+07:00\",\n                \"updated_at\": \"2024-12-09T22:00:57.039+07:00\"\n            },\n            \"user_id\": 1,\n            \"swiped_user_id\": 224,\n            \"swiped_user\": {\n                \"id\": 224,\n                \"email\": \"maximillia43@example.com\",\n                \"bio\": \"Aut fuga dolor est fuga adipisci voluptatem debitis ullam. Voluptatem adipisci tempora molestias error et. Sunt eveniet quisquam voluptatibus aut.\",\n                \"dob\": \"1993-08-18T00:00:00+07:00\",\n                \"location\": \"Amelyhaven\",\n                \"age\": 31,\n                \"name\": \"Eryn Hessel PhD\",\n                \"gender\": \"female\",\n                \"interest\": \"male\",\n                \"created_at\": \"2024-12-09T13:07:29+07:00\",\n                \"updated_at\": \"2024-12-09T13:07:29+07:00\"\n            },\n            \"status\": 1,\n            \"created_at\": \"2024-12-09T21:37:04.842+07:00\",\n            \"updated_at\": \"2024-12-09T22:00:57.151+07:00\"\n        },\n        \"is_verified\": false\n    },\n    \"status\": 200\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8005",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "user1@mail.com",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "123456",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "product.infSwipe.for.1month",
+			"value": ""
+		},
+		{
+			"key": "product.infSwipe.for.6month",
+			"value": ""
+		},
+		{
+			"key": "product.infSwipe.for.12month",
+			"value": ""
+		},
+		{
+			"key": "product.verifiedProfile.for.1month",
+			"value": ""
+		},
+		{
+			"key": "product.verifiedProfile.for.6month",
+			"value": ""
+		},
+		{
+			"key": "product.verifiedProfile.for.12month",
+			"value": ""
+		},
+		{
+			"key": "product.combo1.for.1month",
+			"value": ""
+		},
+		{
+			"key": "product.combo1.for.6month",
+			"value": ""
+		},
+		{
+			"key": "product.combo1.for.12month",
+			"value": ""
+		},
+		{
+			"key": "swipeable_id",
+			"value": ""
+		}
+	]
+}
