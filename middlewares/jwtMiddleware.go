@@ -54,7 +54,7 @@ func (m *JTWMiddleware) GetHandler() gin.HandlerFunc {
 			return
 		}
 
-		if err := database.DB.Where("id = ?", userID).First(&m.LoggedInUser.User).Error; err != nil {
+		if err := database.DB.First(&m.LoggedInUser.User, userID).Error; err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"status": http.StatusUnauthorized,
 				"error":  "Invalid user ID",
