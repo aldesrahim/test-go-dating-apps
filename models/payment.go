@@ -15,7 +15,6 @@ type Payment struct {
 	MonthlyPeriod   uint          `json:"monthly_period"`
 	Price           float64       `json:"price"`
 	PaidAt          *time.Time    `json:"paid_at"`
-	Amount          float64       `json:"amount"`
 	Status          string        `json:"status"`
 	Reference       *string       `json:"reference"`
 	CreatedAt       time.Time     `json:"created_at"`
