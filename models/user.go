@@ -7,9 +7,10 @@ import (
 type User struct {
 	ID            uint           `gorm:"primarykey" json:"id"`
 	Email         string         `gorm:"uniqueIndex" json:"email"`
-	PasswordHash  string         `json:"-"`
-	Bio           *string        `json:"bio"`
+	PasswordHash  string         `gorm:"type:text" json:"-"`
+	Bio           *string        `gorm:"type:text" json:"bio"`
 	DOB           *time.Time     `json:"dob"`
+	Location      *string        `gorm:"type:text" json:"location"`
 	Age           *uint16        `json:"age"`
 	Name          *string        `json:"name"`
 	Gender        *string        `json:"gender"`
