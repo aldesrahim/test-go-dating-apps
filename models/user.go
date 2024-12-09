@@ -25,7 +25,7 @@ func (u *User) IsProfileCompleted() bool {
 	return u.Name != nil
 }
 
-func (u *User) BeforeSave(tx *gorm.DB) (err error) {
+func (u *User) BeforeSave(*gorm.DB) (err error) {
 	if u.DOB != nil {
 		age := uint16(utils.GetAgeFromDate(*u.DOB))
 		u.Age = &age
