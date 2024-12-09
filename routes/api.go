@@ -18,10 +18,21 @@ func ApiRoutes(router *gin.Engine) {
 		auth.POST("/", authController.Login)
 	}
 
-	profile := group.Group("/profile")
-	profile.Use(middlewares.NewJWTMiddleware(loggedInUser).GetHandler())
+	secured := group.Group("/")
+	secured.Use(middlewares.NewJWTMiddleware(loggedInUser).GetHandler())
+
+	profile := secured.Group("/profile")
 	{
-		profile.GET("/", controllers.NewProfileController(loggedInUser).GetProfile)
-		profile.PUT("/", controllers.NewProfileController(loggedInUser).UpdateProfile)
+		profileController := controllers.NewProfileController(loggedInUser)
+		profile.GET("/", profileController.GetProfile)
+		profile.PUT("/", profileController.UpdateProfile)
+	}
+
+	subs := secured.Group("/subscription")
+	{
+		subsController := controllers.NewSubsController(loggedInUser)
+		subs.GET("/active", subsController.GetActive)
+		subs.GET("/products", subsController.GetProducts)
+		subs.POST("/buy", subsController.Buy)
 	}
 }
