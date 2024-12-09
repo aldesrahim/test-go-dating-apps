@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "38a94630-7521-4e43-ad84-e40ca9e848bf",
 		"name": "Dealls - GO Dating Apps",
+		"description": "API Documentation for GO Dating Apps\n\nNotes: please check for notes in each folder",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5821447"
 	},
@@ -378,7 +379,8 @@
 						}
 					]
 				}
-			]
+			],
+			"description": "The authentication\n\nIt uses JWT for authentication"
 		},
 		{
 			"name": "profile",
@@ -531,7 +533,8 @@
 						}
 					]
 				}
-			]
+			],
+			"description": "Managing user's profile and update it"
 		},
 		{
 			"name": "subscriptions",
@@ -964,7 +967,8 @@
 						}
 					]
 				}
-			]
+			],
+			"description": "This endpoints are just a mock/example for a user's transactions"
 		},
 		{
 			"name": "swipes",
@@ -1243,7 +1247,8 @@
 						}
 					]
 				}
-			]
+			],
+			"description": "There are 2 main endpoints\n\n1. swipeable\n    \n    1. this endpoint will return the user that can be swiped\n        \n    2. it will not change until logged in user swiped (like or pass)\n        \n2. save\n    \n    1. this endpoint will save the \"status\" of today's swipeable"
 		}
 	],
 	"event": [
