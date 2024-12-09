@@ -39,9 +39,7 @@ func main() {
 		&models.SwipeHistory{},
 		&models.Match{},
 		&models.Payment{},
-		&models.PaymentDetail{},
 		&models.Subscribe{},
-		&models.SubscribeDetail{},
 	)
 
 	r := gin.Default()
