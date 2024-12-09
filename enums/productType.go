@@ -17,7 +17,7 @@ func (t *ProductType) label() (string, error) {
 	case ProductTypeVerifiedProfile:
 		return "Verified Profile", nil
 	case ProductTypeCombo1:
-		return "Infinite Swipe + Verified Profile", nil
+		return "Combo (Infinite Swipe + Verified Profile)", nil
 	default:
 		return "", errors.New("invalid product type")
 	}
