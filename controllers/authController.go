@@ -47,7 +47,11 @@ func Register(c *gin.Context) {
 		return
 	}
 
+	token, _ := utils.GenerateJWT(user.ID)
+
 	c.JSON(http.StatusOK, gin.H{
-		"user": user,
+		"status": http.StatusOK,
+		"user":   user,
+		"token":  token,
 	})
 }
