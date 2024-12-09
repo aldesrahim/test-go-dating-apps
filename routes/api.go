@@ -10,4 +10,5 @@ func ApiRoutes(router *gin.Engine) {
 
 	auth := group.Group("/auth")
 	auth.POST("/register", controllers.Register)
+	auth.POST("/", controllers.Login)
 }
