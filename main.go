@@ -37,7 +37,6 @@ func main() {
 		&models.User{},
 		&models.Swipe{},
 		&models.SwipeHistory{},
-		&models.Match{},
 		&models.Payment{},
 		&models.Subscribe{},
 	)
