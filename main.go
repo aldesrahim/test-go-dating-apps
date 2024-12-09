@@ -2,6 +2,7 @@ package main
 
 import (
 	"aldesrahim/test-go-dating-apps/database"
+	"aldesrahim/test-go-dating-apps/models"
 	"aldesrahim/test-go-dating-apps/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -30,7 +31,18 @@ func main() {
 	}
 
 	database.Connect()
-	database.Migrate()
+	database.DB.AutoMigrate(
+		&models.Product{},
+		&models.ProductPeriod{},
+		&models.User{},
+		&models.Swipe{},
+		&models.SwipeHistory{},
+		&models.Match{},
+		&models.Payment{},
+		&models.PaymentDetail{},
+		&models.Subscribe{},
+		&models.SubscribeDetail{},
+	)
 
 	r := gin.Default()
 	routes.ApiRoutes(r)
