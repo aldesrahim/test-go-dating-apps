@@ -35,4 +35,11 @@ func ApiRoutes(router *gin.Engine) {
 		subs.GET("/products", subsController.GetProducts)
 		subs.POST("/buy", subsController.Buy)
 	}
+
+	swipes := secured.Group("/swipes")
+	{
+		swipeController := controllers.NewSwipeController(loggedInUser)
+		swipes.GET("/", swipeController.GetSwipeable)
+		swipes.POST("/", swipeController.Swipe)
+	}
 }

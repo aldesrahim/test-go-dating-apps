@@ -3,6 +3,7 @@ package services
 import (
 	"aldesrahim/test-go-dating-apps/database"
 	"aldesrahim/test-go-dating-apps/models"
+	"database/sql"
 	"time"
 )
 
@@ -10,7 +11,7 @@ func GetUserActiveSubs(userID uint) *models.Subscribe {
 	today := time.Now().Format(time.DateOnly)
 	var activeSubs *models.Subscribe
 
-	if err := database.DB.Preload("Product").Where("user_id = ?", userID).Where("start_date <= ? AND end_date >= ?", today, today).First(&activeSubs).Error; err != nil {
+	if err := database.DB.Preload("Product").Where("user_id = ?", userID).Where("start_date <= @today AND end_date >= @today", sql.Named("today", today)).First(&activeSubs).Error; err != nil {
 		return nil
 	}
 

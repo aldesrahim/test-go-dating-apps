@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+	"aldesrahim/test-go-dating-apps/enums"
+	"time"
+)
 
 type Subscribe struct {
 	ID              uint           `gorm:"primarykey" json:"id"`
@@ -16,4 +19,12 @@ type Subscribe struct {
 	EndDate         time.Time      `gorm:"type=DATE" json:"end_date"`
 	CreatedAt       time.Time      `json:"created_at"`
 	UpdatedAt       time.Time      `json:"updated_at"`
+}
+
+func (s *Subscribe) IsUnlimitedSwipes() bool {
+	return s.Product.Code == string(enums.ProductTypeInfiniteSwipe) || s.Product.Code == string(enums.ProductTypeCombo1)
+}
+
+func (s *Subscribe) IsUserVerified() bool {
+	return s.Product.Code == string(enums.ProductTypeVerifiedProfile) || s.Product.Code == string(enums.ProductTypeCombo1)
 }
